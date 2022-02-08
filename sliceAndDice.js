@@ -1,4 +1,4 @@
-const checkBoxesCategory = document.querySelectorAll("[category]");
+let checkBoxesCategory = document.querySelectorAll("[category]");
 
 class ADVANCESEARCH {
     constructor() {
