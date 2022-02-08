@@ -1,10 +1,10 @@
 let checkBoxesCategory = document.querySelectorAll("[category]");
-let clonedTag = document.querySelector(".filter-tag").cloneNode(true);
+let clonedTag = document.querySelector(".filter-tag");
 let resetFilter = document.querySelectorAll(".adv-reset-link");
 class ADVANCESEARCH {
     constructor() {
         this.checkBoxesCategory = checkBoxesCategory;
-        this.clonedTag = clonedTag;
+        this.clonedTag = clonedTag.cloneNode(true);
         this.resetFilter = resetFilter;
         this.init();
     }
