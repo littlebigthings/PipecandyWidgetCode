@@ -1,11 +1,17 @@
-let checkBoxesCategory = document.querySelectorAll("[category]");
-let clonedTag = document.querySelector(".filter-tag");
-let resetFilter = document.querySelectorAll(".adv-reset-link");
+// let checkBoxesCategory = document.querySelectorAll("[category]");
+// let clonedTag = document.querySelector(".filter-tag");
+// let resetFilter = document.querySelectorAll(".adv-reset-link");
+
+let componentWrp = document.querySelectorAll(".comerce-two-block");
+
+let componentObj = [];
+
 class ADVANCESEARCH {
-    constructor() {
-        this.checkBoxesCategory = checkBoxesCategory;
-        this.clonedTag = clonedTag;
-        this.resetFilter = resetFilter;
+    constructor(options) {
+        this.checkBoxesCategory = options.checkBoxesCategory;
+        this.clonedTag = options.clonedTag;
+        this.resetFilter = options.resetFilter;
+        this.wrapper = options.wrapper;
         this.init();
     }
 
@@ -15,7 +21,7 @@ class ADVANCESEARCH {
     }
     // add listener to checkboxes as well as rest button.
     addListener() {
-        checkBoxesCategory.forEach(category => {
+        this.checkBoxesCategory.forEach(category => {
             let checkBoxs = category.querySelectorAll("[type='checkbox']");
             if (!checkBoxs) return;
             checkBoxs.forEach(chkbx => {
@@ -38,21 +44,21 @@ class ADVANCESEARCH {
         // reset the filter.
         this.resetFilter.forEach(resetBtn => {
             resetBtn.addEventListener('click', () => {
-                document.querySelectorAll(".rm-filter").forEach(closebtn => closebtn.click());
+                this.wrapper.querySelectorAll(".rm-filter").forEach(closebtn => closebtn.click());
             })
         })
     }
 
     // add or remove tags from their respective container as well as check the condition for visibility.
     updateTags(currCate, value, update) {
-        let blockToUpdate = document.querySelector(`[update-category=${currCate}]`);
+        let blockToUpdate = this.wrapper.querySelector(`[update-category=${currCate}]`);
         if (update) {
             let newTag = this.clonedTag.cloneNode(true);
             newTag.querySelector(".filter-tag-name").innerHTML = value;
             newTag.setAttribute('tag', `${value}`);
             newTag.querySelector(".rm-filter").addEventListener('click', (e) => {
                 let getCheckBox = e.target.parentElement.getAttribute("tag");
-                document.querySelector(`[value='${getCheckBox}']`).click();
+                this.wrapper.querySelector(`[value='${getCheckBox}']`).click();
             })
             blockToUpdate.appendChild(newTag);
             this.showAndHideContainer(blockToUpdate);
@@ -65,13 +71,13 @@ class ADVANCESEARCH {
 
     // clear all the tags on load.
     clearTagsOnLoad() {
-        let tagsToRemove = document.querySelector(".adv-category-filter").querySelectorAll(".filter-tag");
+        let tagsToRemove = this.wrapper.querySelector(".adv-category-filter").querySelectorAll(".filter-tag");
         tagsToRemove.forEach(tag => tag.remove());
     }
 
     // show/hide tags container as well as tags parent container based on the tags present.
     showAndHideContainer(blockToUpdate) {
-        let mainWrapper = document.querySelector(".adv-category-filter");
+        let mainWrapper = this.wrapper.querySelector(".adv-category-filter");
         let tagsLength = mainWrapper.querySelectorAll(".filter-tag").length;
         if (tagsLength > 0) {
             mainWrapper.classList.remove("hide-res");
@@ -90,6 +96,16 @@ class ADVANCESEARCH {
     }
 }
 
-if(checkBoxesCategory && clonedTag && resetFilter){
-    new ADVANCESEARCH(checkBoxesCategory, clonedTag, resetFilter)
-}
+// if(checkBoxesCategory && clonedTag && resetFilter){
+//     new ADVANCESEARCH(checkBoxesCategory, clonedTag, resetFilter)
+// }
+
+componentWrp.forEach(wrapper => {
+    let options = {
+        checkBoxesCategory : wrapper.querySelectorAll("[category]"),
+        clonedTag : wrapper.querySelector(".filter-tag"),
+        resetFilter : wrapper.querySelectorAll(".adv-reset-link"),
+        wrapper:wrapper,
+    }
+    new ADVANCESEARCH(options)
+})
