@@ -1,10 +1,11 @@
 let checkBoxesCategory = document.querySelectorAll("[category]");
-
+let clonedTag = document.querySelector(".filter-tag").cloneNode(true);
+let resetFilter = document.querySelectorAll(".adv-reset-link");
 class ADVANCESEARCH {
     constructor() {
         this.checkBoxesCategory = checkBoxesCategory;
-        this.clonedTag = document.querySelector(".filter-tag").cloneNode(true);
-        this.resetFilter = document.querySelectorAll(".adv-reset-link");
+        this.clonedTag = clonedTag;
+        this.resetFilter = resetFilter;
         this.init();
     }
 
@@ -89,6 +90,6 @@ class ADVANCESEARCH {
     }
 }
 
-if(checkBoxesCategory){
-    new ADVANCESEARCH(checkBoxesCategory)
+if(checkBoxesCategory, clonedTag, resetFilter){
+    new ADVANCESEARCH(checkBoxesCategory, clonedTag, resetFilter)
 }
