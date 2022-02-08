@@ -4,7 +4,7 @@ let resetFilter = document.querySelectorAll(".adv-reset-link");
 class ADVANCESEARCH {
     constructor() {
         this.checkBoxesCategory = checkBoxesCategory;
-        this.clonedTag = clonedTag.cloneNode(true);
+        this.clonedTag = clonedTag;
         this.resetFilter = resetFilter;
         this.init();
     }
