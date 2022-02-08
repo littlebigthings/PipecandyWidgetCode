@@ -90,6 +90,6 @@ class ADVANCESEARCH {
     }
 }
 
-if(checkBoxesCategory, clonedTag, resetFilter){
+if(checkBoxesCategory && clonedTag && resetFilter){
     new ADVANCESEARCH(checkBoxesCategory, clonedTag, resetFilter)
 }
