@@ -1,7 +1,7 @@
 let prospectTagContainer = document.querySelectorAll("[data-block='tech']");
 let updateEle = document.querySelectorAll("[data-block='update']");
 class PROSPECTOR {
-    constructor(){
+    constructor(prospectTagContainer, updateEle){
         this.tagsArry = prospectTagContainer;
         this.textArry = updateEle;
         this.init();
